@@ -460,6 +460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armature
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e98f4eb05bb1b6d4c9d4a3e9da625fd8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -467,9 +471,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 960228251}
-    - targetCorrespondingSourceObject: {fileID: 4928492724515802338, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1162075400}
   m_SourcePrefab: {fileID: 100100000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
 --- !u!1001 &636720621
 PrefabInstance:
@@ -523,6 +524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armature (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bfb0d7bd58935f34ba0c2a37f4104fb1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -596,29 +601,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 960228248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3dfa041be80c664995462fb0e540ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4422aeb6eb0e45c4f90cb270bf694a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubeMove
-  step: 1
-  moveTime: 0.1
-  fighter2: {fileID: 1786990283}
---- !u!1 &1162075398 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4928492724515802338, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_PrefabInstance: {fileID: 565895854}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1162075400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162075398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3dfa041be80c664995462fb0e540ca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Move
   step: 1
   moveTime: 0.1
   fighter2: {fileID: 1786990283}
