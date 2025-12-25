@@ -5,93 +5,160 @@ using UnityEngine.InputSystem;
 
 public class BehaviorFighter1 : MonoBehaviour
 {
-    public float step=1f;
-    public float moveTime=0.1f;
     public Transform fighter2;
 
-    private Vector3 targetPos;
-    private bool moving;
-    private float t;
+    public float moveSpeed = 5f;
+
+    public BoxCollider rightHandHitbox;
+    public BoxCollider leftHandHitbox;
+    public BoxCollider rightFootHitbox;
+    public BoxCollider leftFootHitbox;
+
+    public Collider fighter2_hitbox;
 
     private Animator anim;
     private int combo_step = 0;
     private bool canReceiveInput = true;
 
+    public bool isAttacking = false;
+
+
+
 
     void Start()
     {
-        targetPos=transform.position;
         anim = GetComponent<Animator>();
+        rightFootHitbox.enabled = false;
+        leftFootHitbox.enabled = false;
+        rightHandHitbox.enabled = false;
+        leftHandHitbox.enabled = false;
+
     }
 
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame) {
-            Debug.Log(canReceiveInput);
-        }
 
         if (Mouse.current.leftButton.wasPressedThisFrame && canReceiveInput)
         {
-            
+            isAttacking = true;
             combo_step++;
-            if(combo_step>3) combo_step=1;
+            if (combo_step > 3) combo_step = 1;
 
             anim.SetInteger("combo_step", combo_step);
-            Debug.Log(combo_step);
             if (Keyboard.current.leftShiftKey.isPressed)
             {
                 anim.SetTrigger("Heavy_attack");
-                Debug.Log("Heavy attack");
             }
-            else {
+            else
+            {
                 anim.SetTrigger("Light_attack");
-                Debug.Log("Light attack");
             }
-                
+
             canReceiveInput = false;
-            
+
 
         }
-
-        if (!moving)
+        if (isAttacking)
         {
-            if (Keyboard.current.aKey.wasPressedThisFrame && ((transform.position.x>-3) && (Mathf.Abs(transform.position.x-fighter2.position.x)<3)))
-            {
-                targetPos+=Vector3.left*step;
-                moving = true;
-                t = 0f;
-            }
-
-            if (Keyboard.current.dKey.wasPressedThisFrame && (transform.position.x < (fighter2.position.x - 1)))
-            {
-                targetPos+=Vector3.right*step;
-                moving = true;
-                t = 0f;
-            }
+            anim.SetTrigger("Idle");
         }
-
-        if (moving)
+        else
         {
-            t+=Time.deltaTime;
-            transform.position=Vector3.Lerp(transform.position, targetPos, t);
+            float moveDir = 0f;
 
-            if (t>=moveTime)
+            if (Keyboard.current.aKey.isPressed &&
+                transform.position.x > -4 &&
+                Mathf.Abs(transform.position.x - fighter2.position.x) < 4)
             {
-                transform.position=targetPos;
-                moving=false;
+                if (Keyboard.current.dKey.isPressed)
+                {
+                    moveDir = 0f;
+                }
+                else
+                {  
+                    moveDir = -1f;
+                    anim.SetTrigger("Walk_B");
+                }
+            }
+            else if (Keyboard.current.dKey.isPressed &&
+                     transform.position.x < (fighter2.position.x - 1))
+            {
+                if (Keyboard.current.aKey.isPressed)
+                {
+                    moveDir = 0f;
+                }
+                else
+                {
+                    moveDir = 1f;
+                    anim.SetTrigger("Walk_F");
+                }
+
+            }
+
+            if (moveDir == 0f)
+            {
+                anim.SetTrigger("Idle");
+            }
+
+            if (moveDir != 0f)
+            {
+                transform.position += Vector3.right * moveDir * moveSpeed * Time.deltaTime;
             }
         }
+
+
     }
 
     public void EnableNextInput()
     {
         canReceiveInput = true;
+        isAttacking = false;
     }
     public void ResetCombo()
     {
         combo_step = 0;
         anim.SetInteger("combo_step", 0);
         EnableNextInput();
+    }
+
+    public void EnableHitbox(string hitboxName)
+    {
+        if (hitboxName == "RightHand")
+        {
+            rightHandHitbox.enabled = true;
+        }
+        else if (hitboxName == "LeftHand")
+        {
+            leftHandHitbox.enabled = true;
+        }
+        else if (hitboxName == "RightFoot")
+        {
+            rightFootHitbox.enabled = true;
+        }
+        else if (hitboxName == "LeftFoot")
+        {
+            leftFootHitbox.enabled = true;
+        }
+    }
+
+    public void DisableHitbox(string hitboxName)
+    {
+        if (hitboxName == "RightHand")
+        {
+            rightHandHitbox.enabled = false;
+        }
+        else if (hitboxName == "LeftHand")
+        {
+            leftHandHitbox.enabled = false;
+        }
+        else if (hitboxName == "RightFoot")
+        {
+            rightFootHitbox.enabled = false;
+        }
+        else if (hitboxName == "LeftFoot")
+        {
+            leftFootHitbox.enabled = false;
+        }
     }
 
 }
