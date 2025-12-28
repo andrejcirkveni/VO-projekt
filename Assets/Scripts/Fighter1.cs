@@ -21,6 +21,7 @@ public class BehaviorFighter1 : MonoBehaviour
     private bool canReceiveInput = true;
 
     public bool isAttacking = false;
+    public bool blocking = false;
 
 
 
@@ -58,7 +59,17 @@ public class BehaviorFighter1 : MonoBehaviour
 
 
         }
-        if (isAttacking)
+
+        if (Mouse.current.rightButton.wasPressedThisFrame && canReceiveInput) {
+            anim.SetBool("Guard", true);
+            blocking = true;
+        }
+        else if (Mouse.current.rightButton.wasReleasedThisFrame) {
+            anim.SetBool("Guard", false);
+            blocking = false;
+        }
+
+        if (isAttacking || blocking)
         {
             anim.SetTrigger("Idle");
         }
