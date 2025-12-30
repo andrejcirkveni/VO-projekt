@@ -54,6 +54,8 @@ public class BehaviorFighter1 : MonoBehaviour
             {
                 anim.SetTrigger("Light_attack");
             }
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
 
             canReceiveInput = false;
 
@@ -71,7 +73,8 @@ public class BehaviorFighter1 : MonoBehaviour
 
         if (isAttacking || blocking)
         {
-            anim.SetTrigger("Idle");
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
         }
         else
         {
@@ -85,10 +88,16 @@ public class BehaviorFighter1 : MonoBehaviour
                 {
                     moveDir = 0f;
                 }
+                else if (Keyboard.current.spaceKey.isPressed)
+                {
+                    moveDir = 0f;
+                    anim.SetTrigger("B_Quickstep");
+                    transform.position += Vector3.right * -0.3f;
+                }
                 else
-                {  
+                {
                     moveDir = -1f;
-                    anim.SetTrigger("Walk_B");
+                    anim.SetBool("Walk_B", true);
                 }
             }
             else if (Keyboard.current.dKey.isPressed &&
@@ -98,17 +107,24 @@ public class BehaviorFighter1 : MonoBehaviour
                 {
                     moveDir = 0f;
                 }
+                else if (Keyboard.current.spaceKey.isPressed)
+                {
+                    moveDir = 0f;
+                    anim.SetTrigger("F_Quickstep");
+                    transform.position += Vector3.right * 0.3f;
+                }
                 else
                 {
                     moveDir = 1f;
-                    anim.SetTrigger("Walk_F");
+                    anim.SetBool("Walk_F", true);
                 }
 
             }
 
             if (moveDir == 0f)
             {
-                anim.SetTrigger("Idle");
+                anim.SetBool("Walk_B", false);
+                anim.SetBool("Walk_F", false);
             }
 
             if (moveDir != 0f)
