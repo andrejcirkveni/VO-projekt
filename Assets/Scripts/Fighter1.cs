@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -76,7 +77,7 @@ public class BehaviorFighter1 : MonoBehaviour
             anim.SetBool("Walk_F", false);
             anim.SetBool("Walk_B", false);
         }
-        else
+        else if(canReceiveInput)
         {
             float moveDir = 0f;
 
@@ -91,8 +92,9 @@ public class BehaviorFighter1 : MonoBehaviour
                 else if (Keyboard.current.spaceKey.isPressed)
                 {
                     moveDir = 0f;
+                    Debug.Log("Quickstep");
                     anim.SetTrigger("B_Quickstep");
-                    transform.position += Vector3.right * -0.3f;
+                    canReceiveInput = false;
                 }
                 else
                 {
@@ -110,8 +112,9 @@ public class BehaviorFighter1 : MonoBehaviour
                 else if (Keyboard.current.spaceKey.isPressed)
                 {
                     moveDir = 0f;
+                    Debug.Log("Quickstep");
                     anim.SetTrigger("F_Quickstep");
-                    transform.position += Vector3.right * 0.3f;
+                    canReceiveInput = false;
                 }
                 else
                 {
@@ -187,5 +190,40 @@ public class BehaviorFighter1 : MonoBehaviour
             leftFootHitbox.enabled = false;
         }
     }
+
+    public void Quickstep(float dir) {
+        StartCoroutine(QuickstepRoutine(dir));
+    }
+
+    IEnumerator QuickstepRoutine(float dir)
+    {
+        int frames = 15;
+        float distance = 1f;
+
+        float startX = transform.position.x;
+        float targetX = startX + dir * distance;
+
+        if (dir > 0)
+        {
+            float limit = fighter2.position.x - 1f;
+            if (targetX > limit)
+                targetX = limit;
+        }
+        else
+        {
+            float limit = -4f;
+            if (targetX < limit)
+                targetX = limit;
+        }
+
+        float stepPerFrame = (targetX - startX) / frames;
+
+        for (int i = 0; i < frames; i++)
+        {
+            transform.position += Vector3.right * stepPerFrame;
+            yield return null;
+        }
+    }
+
 
 }
