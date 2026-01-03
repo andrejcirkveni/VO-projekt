@@ -17,15 +17,16 @@ public class BehaviorFighter1 : MonoBehaviour
 
     public Collider fighter2_hitbox;
 
-    private Animator anim;
+    public Animator anim;
     private int combo_step = 0;
     private bool canReceiveInput = true;
 
     public bool isAttacking = false;
     public bool blocking = false;
 
-    private FighterHealth myHealth;
+    public FighterHealth myHealth;
 
+    public AbilityAbs ability;
 
 
 
@@ -42,6 +43,14 @@ public class BehaviorFighter1 : MonoBehaviour
 
     void Update()
     {
+        //temp
+        if (Keyboard.current.rKey.wasPressedThisFrame && canReceiveInput)
+        {
+            ability?.Activate(this);
+            isAttacking = true;
+        }
+        //
+
 
         if (Mouse.current.leftButton.wasPressedThisFrame && canReceiveInput)
         {

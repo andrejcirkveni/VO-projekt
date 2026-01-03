@@ -28,4 +28,9 @@ public class FighterHealth : MonoBehaviour
             Debug.Log("KO");
         }
     }
+    public void Heal(int amount)
+    {
+        health += amount;
+        Debug.Log($"{gameObject.name} Healed. HP: {health}");
+    }
 }
