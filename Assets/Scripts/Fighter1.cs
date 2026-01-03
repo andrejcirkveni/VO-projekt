@@ -24,6 +24,8 @@ public class BehaviorFighter1 : MonoBehaviour
     public bool isAttacking = false;
     public bool blocking = false;
 
+    private FighterHealth myHealth;
+
 
 
 
@@ -34,6 +36,7 @@ public class BehaviorFighter1 : MonoBehaviour
         leftFootHitbox.enabled = false;
         rightHandHitbox.enabled = false;
         leftHandHitbox.enabled = false;
+        myHealth = GetComponent<FighterHealth>();
 
     }
 
@@ -66,10 +69,12 @@ public class BehaviorFighter1 : MonoBehaviour
         if (Mouse.current.rightButton.wasPressedThisFrame && canReceiveInput) {
             anim.SetBool("Guard", true);
             blocking = true;
+            myHealth.isBlocking = true;
         }
         else if (Mouse.current.rightButton.wasReleasedThisFrame) {
             anim.SetBool("Guard", false);
             blocking = false;
+            myHealth.isBlocking = false;
         }
 
         if (isAttacking || blocking)
