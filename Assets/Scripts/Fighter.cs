@@ -1,0 +1,232 @@
+using System;
+using System.Collections;
+using System.Threading;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class BehaviorFighter : MonoBehaviour
+{
+    public FighterInputConfig input;
+    public Transform opponent;
+    public AbilityAbs ability;
+
+    public float moveSpeed = 5f;
+
+    public BoxCollider rightHandHitbox;
+    public BoxCollider leftHandHitbox;
+    public BoxCollider rightFootHitbox;
+    public BoxCollider leftFootHitbox;
+
+    public Animator anim;
+    public FighterHealth myHealth;
+
+    private int comboStep = 0;
+    private bool canReceiveInput = true;
+    private bool isAttacking;
+    private bool isBlocking;
+
+    public float arenaLeft = -4f;
+    public float arenaRight = 4f;
+    public float minDistanceToOpponent = 1f;
+
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        myHealth = GetComponent<FighterHealth>();
+
+        rightHandHitbox.enabled = false;
+        leftHandHitbox.enabled = false;
+        rightFootHitbox.enabled = false;
+        leftFootHitbox.enabled = false;
+    }
+
+    void OnEnable()
+    {
+        input.move.Enable();
+        input.attack.Enable();
+        input.guard.Enable();
+        input.ability.Enable();
+        input.quickstep.Enable();
+        input.heavyModifier.Enable();
+    }
+
+    void OnDisable()
+    {
+        input.move.Disable();
+        input.attack.Disable();
+        input.guard.Disable();
+        input.ability.Disable();
+        input.quickstep.Disable();
+        input.heavyModifier.Disable();
+    }
+
+    void Update()
+    {
+        HandleAbility();
+        HandleAttack();
+        HandleGuard();
+        HandleMovement();
+    }
+
+
+    void HandleAbility()
+    {
+        if (!canReceiveInput) return;
+
+        if (input.ability.WasPressedThisFrame())
+        {
+            isAttacking = true;
+            ability?.Activate(this);
+            canReceiveInput = false;
+        }
+    }
+
+    void HandleAttack()
+    {
+        if (!canReceiveInput) return;
+
+        if (input.attack.WasPressedThisFrame())
+        {
+            isAttacking = true;
+            comboStep = comboStep % 3 + 1;
+
+            anim.SetInteger("combo_step", comboStep);
+
+            if (input.heavyModifier.IsPressed())
+                anim.SetTrigger("Heavy_attack");
+            else
+                anim.SetTrigger("Light_attack");
+
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
+
+            canReceiveInput = false;
+        }
+    }
+
+    void HandleGuard()
+    {
+        isBlocking = input.guard.IsPressed();
+
+        anim.SetBool("Guard", isBlocking);
+        myHealth.isBlocking = isBlocking;
+    }
+
+    void HandleMovement()
+    {
+        if (!canReceiveInput || isAttacking || isBlocking)
+        {
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
+            return;
+        }
+
+        float moveDir = input.move.ReadValue<float>();
+
+        if (Mathf.Abs(moveDir) < 0.01f)
+        {
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
+            return;
+        }
+
+        if (input.quickstep.WasPressedThisFrame())
+        {
+            anim.SetTrigger(moveDir > 0 ? "F_Quickstep" : "B_Quickstep");
+            canReceiveInput = false;
+            return;
+        }
+
+        int facing = opponent.position.x > transform.position.x ? 1 : -1;
+        float distance = opponent.position.x - transform.position.x;
+
+        if ((moveDir < 0 && transform.position.x <= arenaLeft)
+            || (moveDir > 0 && transform.position.x >= arenaRight)
+            || (moveDir > 0 && distance < minDistanceToOpponent && facing == 1)
+            || (moveDir < 0 && distance < minDistanceToOpponent && facing == -1)
+            ) { 
+            moveDir = 0f;
+        }
+
+        anim.SetBool("Walk_F", moveDir > 0);
+        anim.SetBool("Walk_B", moveDir < 0);
+
+        transform.position += Vector3.right * moveDir * moveSpeed * Time.deltaTime;
+    }
+
+
+    public void EnableNextInput()
+    {
+        canReceiveInput = true;
+        isAttacking = false;
+    }
+
+    public void ResetCombo()
+    {
+        comboStep = 0;
+        anim.SetInteger("combo_step", 0);
+        EnableNextInput();
+    }
+
+    public void AbilityEvent()
+    {
+        ability?.OnAnimationEvent(this);
+    }
+
+    public void EnableHitbox(string name)
+    {
+        GetHitbox(name).enabled = true;
+    }
+
+    public void DisableHitbox(string name)
+    {
+        GetHitbox(name).enabled = false;
+    }
+
+    BoxCollider GetHitbox(string name)
+    {
+        return name switch
+        {
+            "RightHand" => rightHandHitbox,
+            "LeftHand" => leftHandHitbox,
+            "RightFoot" => rightFootHitbox,
+            "LeftFoot" => leftFootHitbox,
+            _ => null
+        };
+    }
+
+    public void Quickstep(float dir)
+    {
+        StartCoroutine(QuickstepRoutine(dir));
+    }
+    IEnumerator QuickstepRoutine(float dir)
+    {
+        int frames = 15;
+        float distance = 1f;
+
+        int facing = opponent.position.x > transform.position.x ? 1 : -1;
+
+        float startX = transform.position.x;
+        float targetX = startX + dir * distance;
+
+        float opponentLimit = opponent.position.x - facing * minDistanceToOpponent;
+        Debug.Log(opponentLimit);
+
+        if (facing == 1)
+            targetX = Mathf.Min(targetX, opponentLimit);
+        else
+            targetX = Mathf.Max(targetX, opponentLimit);
+
+        targetX = Mathf.Clamp(targetX, arenaLeft, arenaRight);
+
+        float stepPerFrame = (targetX - startX) / frames;
+
+        for (int i = 0; i < frames; i++)
+        {
+            transform.position += Vector3.right * stepPerFrame;
+            yield return null;
+        }
+    }
+
+}
