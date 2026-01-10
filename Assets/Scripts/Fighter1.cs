@@ -1,12 +1,14 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BehaviorFighter1 : MonoBehaviour
+public class BehaviorFighter : MonoBehaviour
 {
-    public Transform fighter2;
+    public FighterInputConfig input;
+    public Transform opponent;
+    public AbilityAbs ability;
 
     public float moveSpeed = 5f;
 
@@ -15,7 +17,7 @@ public class BehaviorFighter1 : MonoBehaviour
     public BoxCollider rightFootHitbox;
     public BoxCollider leftFootHitbox;
 
-    public Collider fighter2_hitbox;
+    //public Collider fighter2_hitbox;
 
     public Animator anim;
     private int combo_step = 0;
@@ -26,7 +28,6 @@ public class BehaviorFighter1 : MonoBehaviour
 
     public FighterHealth myHealth;
 
-    public AbilityAbs ability;
 
 
 
@@ -44,45 +45,40 @@ public class BehaviorFighter1 : MonoBehaviour
     void Update()
     {
         //temp
-        if (Keyboard.current.rKey.wasPressedThisFrame && canReceiveInput)
+        if (Keyboard.current[input.ability].wasPressedThisFrame && canReceiveInput)
         {
-            ability?.Activate(this);
             isAttacking = true;
+            ability?.Activate(this);
         }
         //
-
-
-        if (Mouse.current.leftButton.wasPressedThisFrame && canReceiveInput)
+        if (Keyboard.current[input.attack].wasPressedThisFrame && canReceiveInput)
         {
-            isAttacking = true;
-            combo_step++;
-            if (combo_step > 3) combo_step = 1;
+            isAttacking=true;
+            combo_step=combo_step % 3 + 1;
 
             anim.SetInteger("combo_step", combo_step);
-            if (Keyboard.current.leftShiftKey.isPressed)
-            {
+
+            if (Keyboard.current[input.heavyModifier].isPressed)
                 anim.SetTrigger("Heavy_attack");
-            }
             else
-            {
                 anim.SetTrigger("Light_attack");
-            }
+
             anim.SetBool("Walk_F", false);
             anim.SetBool("Walk_B", false);
 
             canReceiveInput = false;
-
-
         }
 
-        if (Mouse.current.rightButton.wasPressedThisFrame && canReceiveInput) {
+        if (Keyboard.current[input.guard].isPressed)
+        {
             anim.SetBool("Guard", true);
-            blocking = true;
+            blocking= true;
             myHealth.isBlocking = true;
         }
-        else if (Mouse.current.rightButton.wasReleasedThisFrame) {
+        else
+        {
             anim.SetBool("Guard", false);
-            blocking = false;
+            blocking = true;
             myHealth.isBlocking = false;
         }
 
@@ -95,15 +91,15 @@ public class BehaviorFighter1 : MonoBehaviour
         {
             float moveDir = 0f;
 
-            if (Keyboard.current.aKey.isPressed &&
+            if (Keyboard.current[input.left].isPressed &&
                 transform.position.x > -4 &&
-                Mathf.Abs(transform.position.x - fighter2.position.x) < 4)
+                Mathf.Abs(transform.position.x - opponent.position.x) < 4)
             {
-                if (Keyboard.current.dKey.isPressed)
+                if (Keyboard.current[input.right].isPressed)
                 {
                     moveDir = 0f;
                 }
-                else if (Keyboard.current.spaceKey.isPressed)
+                else if (Keyboard.current[input.quickstep].isPressed)
                 {
                     moveDir = 0f;
                     Debug.Log("Quickstep");
@@ -116,14 +112,14 @@ public class BehaviorFighter1 : MonoBehaviour
                     anim.SetBool("Walk_B", true);
                 }
             }
-            else if (Keyboard.current.dKey.isPressed &&
-                     transform.position.x < (fighter2.position.x - 1))
+            else if (Keyboard.current[input.right].isPressed &&
+                     transform.position.x < (opponent.position.x - 1))
             {
-                if (Keyboard.current.aKey.isPressed)
+                if (Keyboard.current[input.left].isPressed)
                 {
                     moveDir = 0f;
                 }
-                else if (Keyboard.current.spaceKey.isPressed)
+                else if (Keyboard.current[input.quickstep].isPressed)
                 {
                     moveDir = 0f;
                     Debug.Log("Quickstep");
@@ -209,6 +205,12 @@ public class BehaviorFighter1 : MonoBehaviour
         StartCoroutine(QuickstepRoutine(dir));
     }
 
+    public void AbilityEvent()
+    {
+        Debug.Log("Abilizy");
+        ability?.OnAnimationEvent(this);
+    }
+
     IEnumerator QuickstepRoutine(float dir)
     {
         int frames = 15;
@@ -219,7 +221,7 @@ public class BehaviorFighter1 : MonoBehaviour
 
         if (dir > 0)
         {
-            float limit = fighter2.position.x - 1f;
+            float limit = opponent.position.x - 1f;
             if (targetX > limit)
                 targetX = limit;
         }
@@ -241,3 +243,4 @@ public class BehaviorFighter1 : MonoBehaviour
 
 
 }
+*/

@@ -1164,6 +1164,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1786990286}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1786990289}
   m_SourcePrefab: {fileID: 100100000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
 --- !u!1001 &759288193
 PrefabInstance:
@@ -1240,10 +1243,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ec5791efc25df4b6187ffb67c6d30623, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1371452518}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec5791efc25df4b6187ffb67c6d30623, type: 3}
 --- !u!1 &781783929 stripped
 GameObject:
@@ -1394,15 +1394,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4422aeb6eb0e45c4f90cb270bf694a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BehaviorFighter1
-  fighter2: {fileID: 1786990283}
+  input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
+  opponent: {fileID: 1786990283}
+  ability: {fileID: 11400000, guid: 2dd96bd3f7ca8e946825ea5c8070c36a, type: 2}
   moveSpeed: 3
   rightHandHitbox: {fileID: 603143996}
   leftHandHitbox: {fileID: 814149585}
   rightFootHitbox: {fileID: 1244522997}
   leftFootHitbox: {fileID: 781783931}
-  fighter2_hitbox: {fileID: 0}
-  isAttacking: 0
-  blocking: 0
+  anim: {fileID: 0}
+  myHealth: {fileID: 0}
+  arenaLeft: -4
+  arenaRight: 4
+  minDistanceToOpponent: 1
 --- !u!114 &960228256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FighterHealth
   health: 10
+  isBlocking: 0
 --- !u!54 &960228258
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1503,32 +1508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   damage: 2
---- !u!1 &1371452517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ec5791efc25df4b6187ffb67c6d30623, type: 3}
-  m_PrefabInstance: {fileID: 759288193}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1371452518
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371452517}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.80573505, y: 0.84924936, z: 0.7955909}
-  m_Center: {x: -0.0030127168, y: 1.4051921, z: -0.08663139}
 --- !u!1001 &1419091763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1601,9 +1580,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 956b59532febc4b0dba0e992127c2692, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1578603762}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 956b59532febc4b0dba0e992127c2692, type: 3}
       insertIndex: -1
       addedObject: {fileID: 781783931}
@@ -1639,32 +1615,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
   m_PrefabInstance: {fileID: 636720621}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1578603760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 956b59532febc4b0dba0e992127c2692, type: 3}
-  m_PrefabInstance: {fileID: 1419091763}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1578603762
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578603760}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.73149586, z: 0.79278356}
-  m_Center: {x: 3.0399462e-16, y: 1.5018046, z: -0.10360825}
 --- !u!4 &1786990283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
@@ -1683,6 +1633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FighterHealth
   health: 10
+  isBlocking: 0
 --- !u!54 &1786990286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1731,6 +1682,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45321155, y: 1.8284477, z: 0.30478102}
   m_Center: {x: 0.00941965, y: 0.91009146, z: 0.009094089}
+--- !u!114 &1786990289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570055880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b36d8a5f162ddb4eb38ef191825aece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter2
+  blocking: 0
 --- !u!1 &2103458142
 GameObject:
   m_ObjectHideFlags: 0

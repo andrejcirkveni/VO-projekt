@@ -5,5 +5,12 @@ public abstract class AbilityAbs : ScriptableObject
     public string abilityName;
     public float cooldown;
 
-    public abstract void Activate(BehaviorFighter1 user);
+    protected BehaviorFighter user;
+
+    public virtual void Activate(BehaviorFighter fighter)
+    {
+        user = fighter;
+    }
+
+    public abstract void OnAnimationEvent(BehaviorFighter fighter);
 }

@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29698bc6241c0004fac7a93926b17901, type: 3}
+  m_Name: FighterInputConfig1
+  m_EditorClassIdentifier: Assembly-CSharp::FighterInputConfig
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f384b8e4-d729-4ea7-aa0b-76f0b70161ce
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: 354c0edc-9d3b-40d1-a4b4-38450adb58ae
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: bc531fd7-cbd5-4f05-9a97-417729189e85
+      m_Path: <Keyboard>/#(A)
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 5af14cf6-5d54-4941-b8d2-9dad9ffa814b
+      m_Path: <Keyboard>/#(D)
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  attack:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1c296c36-68f3-43cc-8c2a-2967a0ab9f5a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: db9ccd70-f25d-4b80-ab6d-b12d9fe8d572
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
+  guard:
+    m_Name: Guard
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a61252bd-8851-4754-a976-59f292431155
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 37d2b70f-15fc-442c-8c8a-68a7d7899bea
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Guard
+      m_Flags: 0
+    m_Flags: 0
+  ability:
+    m_Name: Ability
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 108fe80a-8a68-44d8-ac42-d45d28b1c53f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 63462b30-6e21-4378-ab85-ac9b69965c7e
+      m_Path: <Keyboard>/#(R)
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ability
+      m_Flags: 0
+    m_Flags: 0
+  quickstep:
+    m_Name: Quickstep
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a15bff32-0e76-4890-96ff-14f527f8a110
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 979c726a-b03a-4bea-bc90-b5dec5f4354c
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Quickstep
+      m_Flags: 0
+    m_Flags: 0
+  heavyModifier:
+    m_Name: Heavy Modifier
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 29055d66-60cb-469b-92c3-6de594a8a911
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f2a35c96-c702-440c-aecb-432d2f4c12ea
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Heavy Modifier
+      m_Flags: 0
+    m_Flags: 0
