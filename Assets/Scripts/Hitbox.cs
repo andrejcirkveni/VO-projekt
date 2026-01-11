@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
+    public BehaviorFighter owner;
     public int damage = 1;
 
 
