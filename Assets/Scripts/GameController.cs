@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    [Header("Character Prefabs (isti redoslijed kao u selectu)")]
+    public GameObject[] characterPrefabs;
+
+    [Header("Spawn Points")]
+    public Transform player1Spawn;
+    public Transform player2Spawn;
+
     public GameObject aiEnemyPrefab;
 
     void Start()
     {
-        SpawnPlayer();
+        int p1Index = PlayerPrefs.GetInt("P1_Character", 0);
+        int p2Index = PlayerPrefs.GetInt("P2_Character", 1);
+
+        SpawnPlayer1(p1Index);
 
         if (GameMode.IsSingleplayer)
         {
@@ -15,18 +24,36 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            // multiplayer inicijalizacija 
+            SpawnPlayer2(p2Index);
         }
     }
 
-    void SpawnPlayer()
+    void SpawnPlayer1(int index)
     {
-        Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Instantiate(
+            characterPrefabs[index],
+            player1Spawn.position,
+            player1Spawn.rotation
+        );
+    }
+
+    void SpawnPlayer2(int index)
+    {
+        Instantiate(
+            characterPrefabs[index],
+            player2Spawn.position,
+            player2Spawn.rotation
+        );
     }
 
     void SpawnAIEnemy()
     {
-        Instantiate(aiEnemyPrefab, new Vector3(5, 0, 5), Quaternion.identity);
+        Instantiate(
+            aiEnemyPrefab,
+            player2Spawn.position,
+            player2Spawn.rotation
+        );
     }
 }
+
 
