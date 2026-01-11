@@ -22,8 +22,8 @@ public class BehaviorFighter : MonoBehaviour
 
     private int comboStep = 0;
     private bool canReceiveInput = true;
-    private bool isAttacking;
-    private bool isBlocking;
+    public bool isAttacking;
+    public bool isBlocking;
 
     public float arenaLeft = -4f;
     public float arenaRight = 4f;
@@ -39,6 +39,10 @@ public class BehaviorFighter : MonoBehaviour
         leftHandHitbox.enabled = false;
         rightFootHitbox.enabled = false;
         leftFootHitbox.enabled = false;
+        rightHandHitbox.GetComponent<Hitbox>().owner = this;
+        leftHandHitbox.GetComponent<Hitbox>().owner = this;
+        rightFootHitbox.GetComponent<Hitbox>().owner = this;
+        leftFootHitbox.GetComponent<Hitbox>().owner = this;
     }
 
     void OnEnable()
@@ -236,7 +240,6 @@ public class BehaviorFighter : MonoBehaviour
 
     public void Snap_To_Groud()
     {
-        Debug.Log(transform.position.y);
         Vector3 pos = transform.position;
         pos.y = 0f;
         transform.position = pos;

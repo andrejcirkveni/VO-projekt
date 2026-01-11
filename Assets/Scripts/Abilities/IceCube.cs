@@ -39,7 +39,7 @@ public class IceCube : MonoBehaviour
     {
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + Vector3.up * riseHeight;
-
+        owner.isBlocking = true;
         float t = 0f;
         while (t < 1f)
         {
@@ -47,7 +47,7 @@ public class IceCube : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
-
+        owner.isBlocking = false;
         transform.position = targetPos;
     }
 }
