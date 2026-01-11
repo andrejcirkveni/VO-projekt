@@ -68,6 +68,11 @@ public class BehaviorFighter : MonoBehaviour
         HandleGuard();
         HandleMovement();
     }
+    void LateUpdate()
+    {
+        int facing = opponent.position.x > transform.position.x ? 1 : -1;
+        transform.rotation = Quaternion.Euler(0f, facing*90f, 0f);
+    }
 
 
     void HandleAbility()
@@ -227,6 +232,14 @@ public class BehaviorFighter : MonoBehaviour
             transform.position += Vector3.right * stepPerFrame;
             yield return null;
         }
+    }
+
+    public void Snap_To_Groud()
+    {
+        Debug.Log(transform.position.y);
+        Vector3 pos = transform.position;
+        pos.y = 0f;
+        transform.position = pos;
     }
 
 }
