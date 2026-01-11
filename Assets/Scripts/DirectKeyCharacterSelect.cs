@@ -55,6 +55,7 @@ public class DirectKeyCharacterSelect : MonoBehaviour
 
     void TryPick(int player, int index)
     {
+        Debug.Log("Pokušaj biranja: P" + player + " lik " + index);
         if (taken[index])
             return;
 
