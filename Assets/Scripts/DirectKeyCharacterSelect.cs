@@ -38,7 +38,10 @@ public class DirectKeyCharacterSelect : MonoBehaviour
         if (p2Index == -1)
         {
             if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("aaaaa");
                 TryPick(2, 0);
+            }
 
             if (Input.GetKeyDown(KeyCode.S))
                 TryPick(2, 1);
@@ -56,6 +59,7 @@ public class DirectKeyCharacterSelect : MonoBehaviour
 
     void TryPick(int player, int index)
     {
+        Debug.Log("Pokušaj biranja: P" + player + " lik " + index);
         if (taken[index])
             return;
 

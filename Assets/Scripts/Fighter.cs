@@ -12,10 +12,10 @@ public class BehaviorFighter : MonoBehaviour
 
     public float moveSpeed = 5f;
 
-    public BoxCollider rightHandHitbox;
-    public BoxCollider leftHandHitbox;
-    public BoxCollider rightFootHitbox;
-    public BoxCollider leftFootHitbox;
+    public CapsuleCollider rightHandHitbox;
+    public CapsuleCollider leftHandHitbox;
+    public CapsuleCollider rightFootHitbox;
+    public CapsuleCollider leftFootHitbox;
 
     public Animator anim;
     public FighterHealth myHealth;
@@ -184,7 +184,7 @@ public class BehaviorFighter : MonoBehaviour
         GetHitbox(name).enabled = false;
     }
 
-    BoxCollider GetHitbox(string name)
+    CapsuleCollider GetHitbox(string name)
     {
         return name switch
         {
