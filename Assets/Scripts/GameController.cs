@@ -2,58 +2,69 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [Header("Character Prefabs (isti redoslijed kao u selectu)")]
+    [Header("Character Prefabs")]
     public GameObject[] characterPrefabs;
 
     [Header("Spawn Points")]
     public Transform player1Spawn;
     public Transform player2Spawn;
 
+    [Header("Input configs")]
+    public FighterInputConfig player1Input;
+    public FighterInputConfig player2Input;
+
+    [Header("Camera")]
+    public CameraBehaviour fightCamera;
+
     public GameObject aiEnemyPrefab;
+
+    private BehaviorFighter player1;
+    private BehaviorFighter player2;
 
     void Start()
     {
         int p1Index = PlayerPrefs.GetInt("P1_Character", 0);
         int p2Index = PlayerPrefs.GetInt("P2_Character", 1);
 
-        SpawnPlayer1(p1Index);
+        player1 = SpawnPlayer(p1Index, player1Spawn);
+        player1.input = player1Input;
 
         if (GameMode.IsSingleplayer)
         {
-            SpawnAIEnemy();
+            player2 = SpawnAI();
         }
         else
         {
-            SpawnPlayer2(p2Index);
+            player2 = SpawnPlayer(p2Index, player2Spawn);
+            player2.input = player2Input;
         }
+
+        player1.opponent = player2.transform;
+        player2.opponent = player1.transform;
+
+        fightCamera.fighter1 = player1.transform;
+        fightCamera.fighter2 = player2.transform;
     }
 
-    void SpawnPlayer1(int index)
+    BehaviorFighter SpawnPlayer(int index, Transform spawn)
     {
-        Instantiate(
+        GameObject go = Instantiate(
             characterPrefabs[index],
-            player1Spawn.position,
-            player1Spawn.rotation
+            spawn.position,
+            spawn.rotation
         );
+
+        return go.GetComponent<BehaviorFighter>();
     }
 
-    void SpawnPlayer2(int index)
+    BehaviorFighter SpawnAI()
     {
-        Instantiate(
-            characterPrefabs[index],
-            player2Spawn.position,
-            player2Spawn.rotation
-        );
-    }
-
-    void SpawnAIEnemy()
-    {
-        Instantiate(
+        GameObject go = Instantiate(
             aiEnemyPrefab,
             player2Spawn.position,
             player2Spawn.rotation
         );
+
+        return go.GetComponent<BehaviorFighter>();
     }
 }
-
-

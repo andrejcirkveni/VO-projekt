@@ -586,7 +586,7 @@ MonoBehaviour:
   myHealth: {fileID: 0}
   arenaLeft: -4
   arenaRight: 4
-  minDistanceToOpponent: 1
+  minDistanceToOpponent: 0.5
 --- !u!114 &2460834386919346991
 MonoBehaviour:
   m_ObjectHideFlags: 0

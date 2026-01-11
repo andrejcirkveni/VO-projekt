@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraBehaviour : MonoBehaviour
 {
     public Transform fighter1;
     public Transform fighter2;
