@@ -8,11 +8,12 @@ public class Hitbox : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        FighterHealth health = other.GetComponent<FighterHealth>();
-        if (health == null) return;
+        Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+        if (hurtbox == null) return;
 
-        health.TakeDamage(damage);
+        hurtbox.owner.TakeDamage(damage);
 
-        gameObject.GetComponent<Collider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        
     }
 }

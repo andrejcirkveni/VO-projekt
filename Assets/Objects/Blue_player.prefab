@@ -786,6 +786,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7464722070434039268}
+  - component: {fileID: 4275547242635155359}
+  - component: {fileID: 7406604491532690291}
   m_Layer: 0
   m_Name: mixamorig6:Head
   m_TagString: Untagged
@@ -809,6 +811,42 @@ Transform:
   - {fileID: 5965532686570735869}
   m_Father: {fileID: 360372176402339371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4275547242635155359
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511239741441018976}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12728542
+  m_Height: 0.2863784
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.124387845, z: 0.05}
+--- !u!114 &7406604491532690291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511239741441018976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb5922c3a5baac418a76575682434f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtBox
+  owner: {fileID: 6262909142188210927}
 --- !u!1 &2549200840100616103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,6 +1352,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591661434748985826}
+  - component: {fileID: 7410114768288600884}
+  - component: {fileID: 3777218413157470752}
   m_Layer: 0
   m_Name: mixamorig6:LeftUpLeg
   m_TagString: Untagged
@@ -1337,6 +1377,42 @@ Transform:
   - {fileID: 4659859825903501991}
   m_Father: {fileID: 1135004984073492510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7410114768288600884
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382750464095631753}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.073774904
+  m_Height: 0.4588793
+  m_Direction: 1
+  m_Center: {x: -0.0015563839, y: 0.24048896, z: 0.01122618}
+--- !u!114 &3777218413157470752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382750464095631753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb5922c3a5baac418a76575682434f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtBox
+  owner: {fileID: 6262909142188210927}
 --- !u!1 &4417006121185255542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1457,6 @@ GameObject:
   - component: {fileID: 2274645586564746150}
   - component: {fileID: 2104200131951092120}
   - component: {fileID: 6262909142188210927}
-  - component: {fileID: 4172600736012100167}
   - component: {fileID: 1725931692169168489}
   m_Layer: 0
   m_Name: Blue_player
@@ -1399,7 +1474,7 @@ Transform:
   m_GameObject: {fileID: 4772362480654977894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.7911034, y: 0.00000011920929, z: 0.38446093}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1469,27 +1544,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FighterHealth
   health: 10
   isBlocking: 0
---- !u!65 &4172600736012100167
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4772362480654977894}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.42542222, y: 1.549956, z: 0.27045125}
-  m_Center: {x: -0.0018669739, y: 0.842042, z: -0.023616418}
 --- !u!54 &1725931692169168489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1754,6 +1808,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973772336943912141}
+  - component: {fileID: 1004535442918117200}
+  - component: {fileID: 5794306358823455504}
   m_Layer: 0
   m_Name: mixamorig6:RightUpLeg
   m_TagString: Untagged
@@ -1777,6 +1833,42 @@ Transform:
   - {fileID: 8612165502066922098}
   m_Father: {fileID: 1135004984073492510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1004535442918117200
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373215863312654408}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.073774904
+  m_Height: 0.4588793
+  m_Direction: 1
+  m_Center: {x: -0.0015563839, y: 0.24048896, z: 0.01122618}
+--- !u!114 &5794306358823455504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373215863312654408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb5922c3a5baac418a76575682434f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtBox
+  owner: {fileID: 6262909142188210927}
 --- !u!1 &5414179678611995143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +2037,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5075235156400901190}
+  - component: {fileID: 9032711248055248850}
+  - component: {fileID: 8452506698400071785}
   m_Layer: 0
   m_Name: mixamorig6:Spine2
   m_TagString: Untagged
@@ -1970,6 +2064,40 @@ Transform:
   - {fileID: 5136233303338660680}
   m_Father: {fileID: 7917518645628516878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9032711248055248850
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831665881081329290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.32444054, y: 0.3134972, z: 0.23581402}
+  m_Center: {x: 0.0000000016545447, y: 3.6560804e-10, z: 0.013823741}
+--- !u!114 &8452506698400071785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831665881081329290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb5922c3a5baac418a76575682434f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtBox
+  owner: {fileID: 6262909142188210927}
 --- !u!1 &7080887640845415526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,6 +2169,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7727614451748694256}
+  - component: {fileID: 473859328107771137}
+  - component: {fileID: 4736936607946425491}
   m_Layer: 0
   m_Name: mixamorig6:Spine
   m_TagString: Untagged
@@ -2064,6 +2194,40 @@ Transform:
   - {fileID: 7917518645628516878}
   m_Father: {fileID: 1135004984073492510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &473859328107771137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350145744459604975}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.29852507, y: 0.30677447, z: 0.22246672}
+  m_Center: {x: 0, y: 1.5277869e-10, z: 0.01}
+--- !u!114 &4736936607946425491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350145744459604975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb5922c3a5baac418a76575682434f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtBox
+  owner: {fileID: 6262909142188210927}
 --- !u!1 &7616536619975484015
 GameObject:
   m_ObjectHideFlags: 0
