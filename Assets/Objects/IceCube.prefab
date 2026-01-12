@@ -127,3 +127,6 @@ MonoBehaviour:
   riseHeight: 1.2
   riseDuration: 0.25
   parryDamage: 2
+  knockback:
+    force: 1
+    duration: 0.25

@@ -8,6 +8,7 @@ public class IceCube : MonoBehaviour
     public float riseDuration = 0.25f;
     public int parryDamage = 2;
     private BehaviorFighter owner;
+    public KnockbackData knockback;
 
     public void Init(BehaviorFighter ownerFighter)
     {
@@ -24,15 +25,15 @@ public class IceCube : MonoBehaviour
 
             if (attacker != owner && attacker.isAttacking)
             {
-                attacker.myHealth.TakeDamage(parryDamage);
+                attacker.myHealth.TakeDamage(parryDamage, knockback, owner);
                 return;
             }
         }
 
-        FighterHealth enemyHealth = other.GetComponent<FighterHealth>();
+        FighterHealth enemyHealth = other.GetComponentInParent<FighterHealth>();
         if (enemyHealth != null && enemyHealth != owner.myHealth)
         {
-            enemyHealth.TakeDamage(parryDamage);
+            enemyHealth.TakeDamage(parryDamage, knockback, owner);
         }
     }
     IEnumerator RiseRoutine()

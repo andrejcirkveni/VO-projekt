@@ -11,7 +11,7 @@ public class FighterHealth : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, KnockbackData? knockback, BehaviorFighter? attacker)
     {
         if (isBlocking)
         {
@@ -24,7 +24,12 @@ public class FighterHealth : MonoBehaviour
         health -= dmg;
         Debug.Log($"{name} HP: {health}");
 
-        if (fighter != null && fighter.canBeInterrupted)
+        if (knockback.HasValue && fighter != null)
+        {
+            fighter.ApplyKnockback(attacker, knockback.Value);
+        }
+
+        if (fighter.canBeInterrupted)
         {
             anim.SetTrigger("Hit");
 

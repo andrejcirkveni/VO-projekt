@@ -250,4 +250,26 @@ public class BehaviorFighter : MonoBehaviour
     public void Attack_Active() => canBeInterrupted = false;
     public void Attack_Recovery() => canBeInterrupted = true;
 
+    public void ApplyKnockback(BehaviorFighter attacker, KnockbackData data)
+    {
+        StopAllCoroutines();
+        StartCoroutine(KnockbackRoutine(attacker, data));
+    }
+    IEnumerator KnockbackRoutine(BehaviorFighter attacker, KnockbackData data)
+    {
+        canReceiveInput = false;
+
+        int dir = attacker.transform.position.x < transform.position.x ? 1 : -1;
+
+        float time = 0f;
+        while (time < data.duration)
+        {
+            transform.position += Vector3.right * dir * data.force * Time.deltaTime;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canReceiveInput = true;
+    }
+
 }

@@ -7,12 +7,15 @@ public class Fireball : MonoBehaviour
     public float lifeTime = 3f;
 
     private int direction;
-    private FighterHealth ownerTarget;
+    private FighterHealth target;
+    public KnockbackData knockback;
+    public BehaviorFighter owner;
 
-    public void Init(int dir, FighterHealth target)
+    public void Init(int dir, FighterHealth targetFighter, BehaviorFighter ownerFighter)
     {
         direction = dir;
-        ownerTarget = target;
+        target = targetFighter;
+        owner = ownerFighter;
         Destroy(gameObject, lifeTime);
     }
 
@@ -23,12 +26,12 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        FighterHealth health = other.GetComponent<FighterHealth>();
+        FighterHealth health = other.GetComponentInParent<FighterHealth>();
         if (health == null) return;
 
-        if (health == ownerTarget)
+        if (health == target)
         {
-            health.TakeDamage(damage);
+            health.TakeDamage(damage, knockback, owner);
             Destroy(gameObject);
         }
     }

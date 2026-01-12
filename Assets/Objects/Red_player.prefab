@@ -428,6 +428,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 0}
   damage: 1
+  knockback:
+    force: 0
+    duration: 0
 --- !u!1 &1416430401687462922
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +699,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 0}
   damage: 2
+  knockback:
+    force: 2
+    duration: 0.25
 --- !u!1 &2247739352009590528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 0}
   damage: 1
+  knockback:
+    force: 0
+    duration: 0
 --- !u!1 &4230732231304384633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 0}
   damage: 2
+  knockback:
+    force: 2
+    duration: 0.25
 --- !u!1 &4400025977433961687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,6 +2685,7 @@ MonoBehaviour:
   arenaLeft: -4
   arenaRight: 4
   minDistanceToOpponent: 0.5
+  canBeInterrupted: 1
 --- !u!114 &2460834386919346991
 MonoBehaviour:
   m_ObjectHideFlags: 0

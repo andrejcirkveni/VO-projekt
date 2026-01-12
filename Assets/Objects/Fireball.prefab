@@ -5140,6 +5140,10 @@ MonoBehaviour:
   speed: 6
   damage: 2
   lifeTime: 3
+  knockback:
+    force: 1
+    duration: 0.25
+  owner: {fileID: 0}
 --- !u!135 &3880286295234674519
 SphereCollider:
   m_ObjectHideFlags: 0
