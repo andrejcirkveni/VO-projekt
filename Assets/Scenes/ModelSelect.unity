@@ -176,8 +176,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nature Guardian\n\nHeals himself and allies with nature\u2019s potions.
-    Keeps you alive and strong in long fights."
+  m_text: 'Nature Guardian
+
+
+    Heals himself with nature''s power to survive longer
+    in combat.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
   m_sharedMaterial: {fileID: -1273911402454213745, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
@@ -2003,8 +2006,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ice Warrior\n \nFreezes enemies with icy strikes. Slows foes and reduces
-    damage, giving you control in battle."
+  m_text: "Ice Warrior\n \nCreates an ice barrier that blocks attacks and damages
+    enemies on contact."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
   m_sharedMaterial: {fileID: -1273911402454213745, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
@@ -2279,8 +2282,8 @@ MonoBehaviour:
   m_text: 'Fire Fighter
 
 
-    Burns enemies with fiery attacks. Deals direct damage
-    and dominates the battlefield aggressively.'
+    Fires blazing projectiles that damage opponents from
+    a distance.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
   m_sharedMaterial: {fileID: -1273911402454213745, guid: 55783d04bc6a94dd5bd8e22965b9f250, type: 2}
@@ -2307,7 +2310,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.35
+  m_fontSize: 19.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

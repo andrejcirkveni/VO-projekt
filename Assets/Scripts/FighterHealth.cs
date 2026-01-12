@@ -16,10 +16,19 @@ public class FighterHealth : MonoBehaviour
         if (isBlocking)
         {
             Debug.Log($"{name} BLOCKED");
-            return;
+            dmg = 0;
         }
 
         BehaviorFighter fighter = GetComponent<BehaviorFighter>();
+
+        health -= dmg;
+        Debug.Log($"{name} HP: {health}");
+
+        if (knockback.HasValue && fighter != null && !isBlocking)
+        {
+            fighter.ApplyKnockback(attacker, knockback.Value);
+        }
+
         if (health-dmg <= 0)
         {
             health = 0;
@@ -36,15 +45,7 @@ public class FighterHealth : MonoBehaviour
             return;
         }
 
-        health -= dmg;
-        Debug.Log($"{name} HP: {health}");
-
-        if (knockback.HasValue && fighter != null)
-        {
-            fighter.ApplyKnockback(attacker, knockback.Value);
-        }
-
-        if (fighter.canBeInterrupted)
+        if (fighter.canBeInterrupted && !isBlocking)
         {
             anim.SetTrigger("Hit");
 

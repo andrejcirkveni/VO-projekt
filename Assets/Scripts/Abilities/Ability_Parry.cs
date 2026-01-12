@@ -16,6 +16,7 @@ public class Ability_Parry : AbilityAbs
     {
         int facing = user.opponent.position.x > user.transform.position.x ? 1 : -1;
         Vector3 pos = user.transform.position + Vector3.right * facing * 1f+ Vector3.down*0.4f;
+        user.isBlocking = true;
 
         GameObject ice = Object.Instantiate(
             iceCubePrefab,
@@ -25,5 +26,6 @@ public class Ability_Parry : AbilityAbs
 
         ice.GetComponent<IceCube>().Init(user);
         Object.Destroy(ice, duration);
+        
     }
 }

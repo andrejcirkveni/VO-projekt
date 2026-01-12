@@ -30,6 +30,16 @@ public class Fireball : MonoBehaviour
     {
         if (hasHit) return;
 
+        IceCube iceWall = other.GetComponent<IceCube>();
+        if (iceWall != null)
+        {
+            Debug.Log("Fireball hit Ice Wall!");
+            hasHit = true;
+            GetComponent<Collider>().enabled = false;
+            Destroy(gameObject);
+            return;
+        }
+
         FighterHealth health = other.GetComponentInParent<FighterHealth>();
         if (health == null) return;
         if (health != target) return;

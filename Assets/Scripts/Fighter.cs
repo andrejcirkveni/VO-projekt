@@ -118,7 +118,14 @@ public class BehaviorFighter : MonoBehaviour
 
     void HandleGuard()
     {
-        isBlocking = guardAction.IsPressed();
+        if (guardAction.WasPressedThisFrame())
+        {
+            isBlocking = true;
+        }
+        if (guardAction.WasReleasedThisFrame())
+        {
+            isBlocking = false;
+        }
 
         anim.SetBool("Guard", isBlocking);
         myHealth.isBlocking = isBlocking;
