@@ -23,6 +23,14 @@ public class FighterHealth : MonoBehaviour
         if (health-dmg <= 0)
         {
             health = 0;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
+                rb.isKinematic = false;
+            }
+
+            anim.applyRootMotion = true;
             anim.SetTrigger("End");
             Debug.Log("KO");
             return;
