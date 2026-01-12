@@ -1,17 +1,29 @@
 using UnityEngine;
+using Ilumisoft.HealthSystem;
 
 public class FighterHealth : MonoBehaviour
 {
-    public int health = 10;
     public bool isBlocking = false;
 
     private Animator anim;
+    private Health health; // Ilumisoft Health
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        health = GetComponent<Health>();
+
+        if (health == null)
+        {
+            Debug.LogError("Ilumisoft Health component missing!");
+            return;
+        }
+
+        // reagiraj na smrt
+        health.OnHealthEmpty += OnKO;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         if (isBlocking)
         {
@@ -19,18 +31,26 @@ public class FighterHealth : MonoBehaviour
             return;
         }
 
-        health -= dmg;
-        Debug.Log($"{gameObject.name} HP: {health}");
-        anim.SetTrigger("Hit");
+        health.ApplyDamage(dmg);  
 
-        if (health <= 0)
-        {
-            Debug.Log("KO");
-        }
+        anim.SetTrigger("Hit");
+        Debug.Log($"{gameObject.name} HP: {health.CurrentHealth}");
     }
-    public void Heal(int amount)
+
+    public void Heal(float amount)
     {
-        health += amount;
-        Debug.Log($"{gameObject.name} Healed. HP: {health}");
+        health.AddHealth(amount);
+    }
+
+    private void OnKO()
+    {
+        Debug.Log("KO");
+        anim.SetTrigger("KO");
+    }
+
+    private void OnDestroy()
+    {
+        if (health != null)
+            health.OnHealthEmpty -= OnKO;
     }
 }
