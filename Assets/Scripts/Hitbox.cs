@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
+    public BehaviorFighter owner;
     public int damage = 1;
-
+    public KnockbackData knockback;
 
     void OnTriggerEnter(Collider other)
     {
-        FighterHealth health = other.GetComponent<FighterHealth>();
-        if (health == null) return;
+        Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+        if (hurtbox == null) return;
 
-        health.TakeDamage(damage);
+        hurtbox.owner.TakeDamage(damage, knockback, owner);
 
-        gameObject.GetComponent<Collider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        
     }
 }

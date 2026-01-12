@@ -22,12 +22,14 @@ public class BehaviorFighter : MonoBehaviour
 
     private int comboStep = 0;
     private bool canReceiveInput = true;
-    private bool isAttacking;
-    private bool isBlocking;
+    public bool isAttacking;
+    public bool isBlocking;
 
     public float arenaLeft = -4f;
     public float arenaRight = 4f;
     public float minDistanceToOpponent = 1f;
+
+    public bool canBeInterrupted = true;
 
 
     void Awake()
@@ -39,6 +41,10 @@ public class BehaviorFighter : MonoBehaviour
         leftHandHitbox.enabled = false;
         rightFootHitbox.enabled = false;
         leftFootHitbox.enabled = false;
+        rightHandHitbox.GetComponent<Hitbox>().owner = this;
+        leftHandHitbox.GetComponent<Hitbox>().owner = this;
+        rightFootHitbox.GetComponent<Hitbox>().owner = this;
+        leftFootHitbox.GetComponent<Hitbox>().owner = this;
     }
 
     void OnEnable()
@@ -67,6 +73,11 @@ public class BehaviorFighter : MonoBehaviour
         HandleAttack();
         HandleGuard();
         HandleMovement();
+    }
+    void LateUpdate()
+    {
+        int facing = opponent.position.x > transform.position.x ? 1 : -1;
+        transform.rotation = Quaternion.Euler(0f, facing*90f, 0f);
     }
 
 
@@ -227,6 +238,38 @@ public class BehaviorFighter : MonoBehaviour
             transform.position += Vector3.right * stepPerFrame;
             yield return null;
         }
+    }
+
+    public void Snap_To_Groud()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 0f;
+        transform.position = pos;
+    }
+    public void Attack_Startup() => canBeInterrupted = true;
+    public void Attack_Active() => canBeInterrupted = false;
+    public void Attack_Recovery() => canBeInterrupted = true;
+
+    public void ApplyKnockback(BehaviorFighter attacker, KnockbackData data)
+    {
+        StopAllCoroutines();
+        StartCoroutine(KnockbackRoutine(attacker, data));
+    }
+    IEnumerator KnockbackRoutine(BehaviorFighter attacker, KnockbackData data)
+    {
+        canReceiveInput = false;
+
+        int dir = attacker.transform.position.x < transform.position.x ? 1 : -1;
+
+        float time = 0f;
+        while (time < data.duration)
+        {
+            transform.position += Vector3.right * dir * data.force * Time.deltaTime;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canReceiveInput = true;
     }
 
 }

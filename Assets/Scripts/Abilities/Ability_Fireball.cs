@@ -21,6 +21,6 @@ public class Ability_Fireball : AbilityAbs
         GameObject fb = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
 
         FighterHealth target = user.opponent.GetComponent<FighterHealth>();
-        fb.GetComponent<Fireball>().Init(dir, target);
+        fb.GetComponent<Fireball>().Init(dir, target, user);
     }
 }

@@ -11,22 +11,34 @@ public class FighterHealth : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, KnockbackData? knockback, BehaviorFighter? attacker)
     {
         if (isBlocking)
         {
-            Debug.Log($"{gameObject.name} BLOCKED attack");
+            Debug.Log($"{name} BLOCKED");
             return;
         }
 
+        BehaviorFighter fighter = GetComponent<BehaviorFighter>();
+
         health -= dmg;
-        Debug.Log($"{gameObject.name} HP: {health}");
-        anim.SetTrigger("Hit");
+        Debug.Log($"{name} HP: {health}");
+
+        if (knockback.HasValue && fighter != null)
+        {
+            fighter.ApplyKnockback(attacker, knockback.Value);
+        }
+
+        if (fighter.canBeInterrupted)
+        {
+            anim.SetTrigger("Hit");
+
+            fighter.isAttacking = false;
+            fighter.EnableNextInput();
+        }
 
         if (health <= 0)
-        {
             Debug.Log("KO");
-        }
     }
     public void Heal(int amount)
     {
