@@ -11,6 +11,8 @@ public class Fireball : MonoBehaviour
     public KnockbackData knockback;
     public BehaviorFighter owner;
 
+    private bool hasHit = false;
+
     public void Init(int dir, FighterHealth targetFighter, BehaviorFighter ownerFighter)
     {
         direction = dir;
@@ -26,14 +28,20 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (hasHit) return;
+
         FighterHealth health = other.GetComponentInParent<FighterHealth>();
         if (health == null) return;
+        if (health != target) return;
 
-        if (health == target)
-        {
-            health.TakeDamage(damage, knockback, owner);
-            Destroy(gameObject);
-        }
+        hasHit = true;
+
+        health.TakeDamage(damage, knockback, owner);
+
+        GetComponent<Collider>().enabled = false;
+
+        Destroy(gameObject);
+
     }
 }
 

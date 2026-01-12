@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CubeMove
   input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
   opponent: {fileID: 0}
-  ability: {fileID: 11400000, guid: 2dd96bd3f7ca8e946825ea5c8070c36a, type: 2}
+  ability: {fileID: 11400000, guid: 8b5583ffd36262e4ab945d572080b965, type: 2}
   moveSpeed: 3
   rightHandHitbox: {fileID: 8608847164543801820}
   leftHandHitbox: {fileID: 277061048442340304}

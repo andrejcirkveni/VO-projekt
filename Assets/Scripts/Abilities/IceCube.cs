@@ -9,6 +9,7 @@ public class IceCube : MonoBehaviour
     public int parryDamage = 2;
     private BehaviorFighter owner;
     public KnockbackData knockback;
+    private bool hasHit = false;
 
     public void Init(BehaviorFighter ownerFighter)
     {
@@ -18,6 +19,7 @@ public class IceCube : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (hasHit) return;
         Hitbox hitbox = other.GetComponent<Hitbox>();
         if (hitbox != null)
         {
@@ -35,6 +37,7 @@ public class IceCube : MonoBehaviour
         {
             enemyHealth.TakeDamage(parryDamage, knockback, owner);
         }
+        hasHit = true;
     }
     IEnumerator RiseRoutine()
     {

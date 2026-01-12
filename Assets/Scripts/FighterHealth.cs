@@ -20,6 +20,13 @@ public class FighterHealth : MonoBehaviour
         }
 
         BehaviorFighter fighter = GetComponent<BehaviorFighter>();
+        if (health-dmg <= 0)
+        {
+            health = 0;
+            anim.SetTrigger("End");
+            Debug.Log("KO");
+            return;
+        }
 
         health -= dmg;
         Debug.Log($"{name} HP: {health}");
@@ -37,8 +44,8 @@ public class FighterHealth : MonoBehaviour
             fighter.EnableNextInput();
         }
 
-        if (health <= 0)
-            Debug.Log("KO");
+        
+            
     }
     public void Heal(int amount)
     {
