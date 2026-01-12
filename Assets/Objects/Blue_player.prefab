@@ -563,7 +563,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1283,7 +1283,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CubeMove
   input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
   opponent: {fileID: 0}
-  ability: {fileID: 11400000, guid: 8b5583ffd36262e4ab945d572080b965, type: 2}
+  ability: {fileID: 11400000, guid: 2dd96bd3f7ca8e946825ea5c8070c36a, type: 2}
   moveSpeed: 3
   rightHandHitbox: {fileID: 8608847164543801820}
   leftHandHitbox: {fileID: 277061048442340304}
@@ -1451,6 +1451,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   myHealth: {fileID: 0}
   isAttacking: 0
+  isBlocking: 0
   arenaLeft: -4
   arenaRight: 4
   minDistanceToOpponent: 0.5
