@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24e0e17b565f4d9dae12b5908cfe1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
+  menuMusic: {fileID: 8300000, guid: 7b7af52a819264261896000a1f7155ea, type: 3}
 --- !u!4 &985975554
 Transform:
   m_ObjectHideFlags: 0
