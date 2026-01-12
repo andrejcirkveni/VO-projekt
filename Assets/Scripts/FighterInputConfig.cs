@@ -4,10 +4,11 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "FighterInputConfig", menuName = "Scriptable Objects/FighterInputConfig")]
 public class FighterInputConfig : ScriptableObject
 {
-    public InputAction move;     // -1 / +1
-    public InputAction attack;
-    public InputAction guard;
-    public InputAction ability;
-    public InputAction quickstep;
-    public InputAction heavyModifier;
+    public InputActionAsset actions;
+    public string move = "Move";
+    public string attack = "Attack";
+    public string guard= "Guard";
+    public string ability = "Ability";
+    public string quickstep = "Quickstep";
+    public string heavyModifier = "Heavy";
 }

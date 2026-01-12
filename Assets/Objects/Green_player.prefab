@@ -1527,7 +1527,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4422aeb6eb0e45c4f90cb270bf694a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BehaviorFighter
-  input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
+  inputActions: {fileID: 0}
+  map:
+    m_Name: Map
+    m_Id: 95ac73a3-0ccb-4348-bf31-79b7ce868491
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
   opponent: {fileID: 0}
   ability: {fileID: 11400000, guid: d93975e7b734ba54283a675dac3c92e2, type: 2}
   moveSpeed: 2

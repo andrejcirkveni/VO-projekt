@@ -57,7 +57,9 @@ public class FighterHealth : MonoBehaviour
     }
     public void Heal(int amount)
     {
+        
         health += amount;
+        if (health < 10) health = 10;
         Debug.Log($"{gameObject.name} Healed. HP: {health}");
     }
 }

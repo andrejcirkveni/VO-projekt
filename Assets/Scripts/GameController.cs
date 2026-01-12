@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class GameController : MonoBehaviour
     public Transform player2Spawn;
 
     [Header("Input configs")]
-    public FighterInputConfig player1Input;
-    public FighterInputConfig player2Input;
+    public InputActionAsset inputActions;
 
     [Header("Camera")]
     public CameraBehaviour fightCamera;
@@ -21,13 +21,14 @@ public class GameController : MonoBehaviour
     private BehaviorFighter player1;
     private BehaviorFighter player2;
 
+
     void Start()
     {
         int p1Index = PlayerPrefs.GetInt("P1_Character", 0);
         int p2Index = PlayerPrefs.GetInt("P2_Character", 1);
 
         player1 = SpawnPlayer(p1Index, player1Spawn);
-        player1.input = player1Input;
+        player1.SetActionMap("Fighter1");
 
         if (GameMode.IsSingleplayer)
         {
@@ -36,7 +37,7 @@ public class GameController : MonoBehaviour
         else
         {
             player2 = SpawnPlayer(p2Index, player2Spawn);
-            player2.input = player2Input;
+            player2.SetActionMap("Fighter2");
         }
 
         player1.opponent = player2.transform;
@@ -44,27 +45,37 @@ public class GameController : MonoBehaviour
 
         fightCamera.fighter1 = player1.transform;
         fightCamera.fighter2 = player2.transform;
+
+
+
     }
 
     BehaviorFighter SpawnPlayer(int index, Transform spawn)
     {
         GameObject go = Instantiate(
-            characterPrefabs[index],
-            spawn.position,
-            spawn.rotation
-        );
+        characterPrefabs[index],
+        spawn.position,
+        spawn.rotation
+    );
 
-        return go.GetComponent<BehaviorFighter>();
+        BehaviorFighter fighter = go.GetComponent<BehaviorFighter>();
+
+        fighter.inputActions = Instantiate(inputActions);
+
+        return fighter;
     }
 
     BehaviorFighter SpawnAI()
     {
         GameObject go = Instantiate(
-            aiEnemyPrefab,
-            player2Spawn.position,
-            player2Spawn.rotation
-        );
+        aiEnemyPrefab,
+        player2Spawn.position,
+        player2Spawn.rotation
+    );
 
-        return go.GetComponent<BehaviorFighter>();
+        BehaviorFighter fighter = go.GetComponent<BehaviorFighter>();
+        fighter.inputActions = Instantiate(inputActions);
+
+        return fighter;
     }
 }
