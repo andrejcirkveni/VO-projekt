@@ -594,6 +594,61 @@ CapsuleCollider:
   m_Height: 0.5644383
   m_Direction: 1
   m_Center: {x: -0.0023169562, y: 0.23819733, z: -0.025411008}
+--- !u!1 &1483739654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483739656}
+  - component: {fileID: 1483739655}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1483739655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483739654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8383e62a9a644fc9fd969844182414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sfxSource: {fileID: 0}
+  musicSource: {fileID: 0}
+  music: {fileID: 8300000, guid: 7f4b2a94c2c33413d8a6db094edf45aa, type: 3}
+  flame: {fileID: 8300000, guid: 391a7ae8783694057835a01c982eb052, type: 3}
+  heal: {fileID: 8300000, guid: d1d9f12339f43465aa1f4b474949afda, type: 3}
+  freeze: {fileID: 8300000, guid: 5c7cbb904fa9744da9bc63e68c856451, type: 3}
+  punch: {fileID: 8300000, guid: 0bb5a3d65543a4378ba487731a9e3b3e, type: 3}
+  click: {fileID: 8300000, guid: 83b6527ec052f463aa7182bd99f3406e, type: 3}
+  sfxVolume: 1
+  musicVolume: 0.6
+  randomPitch: 1
+--- !u!4 &1483739656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483739654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16182, y: 1.80862, z: -0.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584337970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6612503023165281482, guid: 5a011f5f7a190491fa40a504e63e13e8, type: 3}
@@ -1390,3 +1445,4 @@ SceneRoots:
   - {fileID: 209322916340517256}
   - {fileID: 2080344309}
   - {fileID: 1944793224}
+  - {fileID: 1483739656}
