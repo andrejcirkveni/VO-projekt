@@ -2673,7 +2673,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
   opponent: {fileID: 0}
   ability: {fileID: 11400000, guid: 2dd96bd3f7ca8e946825ea5c8070c36a, type: 2}
-  moveSpeed: 3
+  moveSpeed: 2
   rightHandHitbox: {fileID: 5090972348677702219}
   leftHandHitbox: {fileID: 7043659814019438810}
   rightFootHitbox: {fileID: 2608592108840865418}

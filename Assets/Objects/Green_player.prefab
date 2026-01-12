@@ -1503,7 +1503,7 @@ Animator:
   m_GameObject: {fileID: 4824401537682218442}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 021c66c5c8dee425eb91593661d3615d, type: 3}
-  m_Controller: {fileID: 9100000, guid: bfb0d7bd58935f34ba0c2a37f4104fb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: e98f4eb05bb1b6d4c9d4a3e9da625fd8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1530,7 +1530,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
   opponent: {fileID: 0}
   ability: {fileID: 11400000, guid: d93975e7b734ba54283a675dac3c92e2, type: 2}
-  moveSpeed: 3
+  moveSpeed: 2
   rightHandHitbox: {fileID: 8247717376615183703}
   leftHandHitbox: {fileID: 181888774809720939}
   rightFootHitbox: {fileID: 2790358413841552679}

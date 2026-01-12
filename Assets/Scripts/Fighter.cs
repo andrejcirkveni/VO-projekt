@@ -37,6 +37,15 @@ public class BehaviorFighter : MonoBehaviour
         anim = GetComponent<Animator>();
         myHealth = GetComponent<FighterHealth>();
 
+        input = Instantiate(input);
+
+        input.move = input.move.Clone();
+        input.attack = input.attack.Clone();
+        input.guard = input.guard.Clone();
+        input.ability = input.ability.Clone();
+        input.quickstep = input.quickstep.Clone();
+        input.heavyModifier = input.heavyModifier.Clone();
+
         rightHandHitbox.enabled = false;
         leftHandHitbox.enabled = false;
         rightFootHitbox.enabled = false;
@@ -150,18 +159,19 @@ public class BehaviorFighter : MonoBehaviour
         }
 
         int facing = opponent.position.x > transform.position.x ? 1 : -1;
-        float distance = opponent.position.x - transform.position.x;
+        float distance = Mathf.Abs(opponent.position.x - transform.position.x);
 
-        if ((moveDir < 0 && transform.position.x <= arenaLeft)
+        if (
+            (moveDir < 0 && transform.position.x <= arenaLeft)
             || (moveDir > 0 && transform.position.x >= arenaRight)
-            || (moveDir > 0 && distance < minDistanceToOpponent && facing == 1)
-            || (moveDir < 0 && distance < minDistanceToOpponent && facing == -1)
-            ) { 
+            || (moveDir == facing && distance < minDistanceToOpponent))
+        {
             moveDir = 0f;
         }
 
-        anim.SetBool("Walk_F", moveDir > 0);
-        anim.SetBool("Walk_B", moveDir < 0);
+
+        anim.SetBool("Walk_F", moveDir==facing);
+        anim.SetBool("Walk_B", moveDir==-facing);
 
         transform.position += Vector3.right * moveDir * moveSpeed * Time.deltaTime;
     }

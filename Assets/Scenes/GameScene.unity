@@ -155,7 +155,7 @@ MonoBehaviour:
   player1Spawn: {fileID: 1088884505}
   player2Spawn: {fileID: 1481442671}
   player1Input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
-  player2Input: {fileID: 11400000, guid: c3caab0293d86b14ea62a678208130c4, type: 2}
+  player2Input: {fileID: 11400000, guid: 78e0d0705816b3f4582af80014c0e56d, type: 2}
   fightCamera: {fileID: 330585548}
   aiEnemyPrefab: {fileID: 0}
 --- !u!4 &48567340
