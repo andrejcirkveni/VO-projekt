@@ -15,18 +15,25 @@ public class FighterHealth : MonoBehaviour
     {
         if (isBlocking)
         {
-            Debug.Log($"{gameObject.name} BLOCKED attack");
+            Debug.Log($"{name} BLOCKED");
             return;
         }
 
+        BehaviorFighter fighter = GetComponent<BehaviorFighter>();
+
         health -= dmg;
-        Debug.Log($"{gameObject.name} HP: {health}");
-        anim.SetTrigger("Hit");
+        Debug.Log($"{name} HP: {health}");
+
+        if (fighter != null && fighter.canBeInterrupted)
+        {
+            anim.SetTrigger("Hit");
+
+            fighter.isAttacking = false;
+            fighter.EnableNextInput();
+        }
 
         if (health <= 0)
-        {
             Debug.Log("KO");
-        }
     }
     public void Heal(int amount)
     {

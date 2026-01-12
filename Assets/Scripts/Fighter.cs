@@ -29,6 +29,8 @@ public class BehaviorFighter : MonoBehaviour
     public float arenaRight = 4f;
     public float minDistanceToOpponent = 1f;
 
+    public bool canBeInterrupted = true;
+
 
     void Awake()
     {
@@ -244,5 +246,8 @@ public class BehaviorFighter : MonoBehaviour
         pos.y = 0f;
         transform.position = pos;
     }
+    public void Attack_Startup() => canBeInterrupted = true;
+    public void Attack_Active() => canBeInterrupted = false;
+    public void Attack_Recovery() => canBeInterrupted = true;
 
 }
