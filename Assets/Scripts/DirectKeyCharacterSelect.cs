@@ -22,24 +22,24 @@ public class DirectKeyCharacterSelect : MonoBehaviour
 
     void Update()
     {
-        if (p1Index == -1)
-        {
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-                TryPick(1, 0);
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-                TryPick(1, 1);
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-                TryPick(1, 2);
-        }
-
         if (p2Index == -1)
         {
-            if (Keyboard.current.aKey.wasPressedThisFrame)
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
                 TryPick(2, 0);
-            if (Keyboard.current.sKey.wasPressedThisFrame)
+            if (Keyboard.current.downArrowKey.wasPressedThisFrame)
                 TryPick(2, 1);
-            if (Keyboard.current.dKey.wasPressedThisFrame)
+            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
                 TryPick(2, 2);
+        }
+
+        if (p1Index == -1)
+        {
+            if (Keyboard.current.aKey.wasPressedThisFrame)
+                TryPick(1, 0);
+            if (Keyboard.current.sKey.wasPressedThisFrame)
+                TryPick(1, 1);
+            if (Keyboard.current.dKey.wasPressedThisFrame)
+                TryPick(1, 2);
         }
 
         if (!gameStarted && p1Index != -1 && p2Index != -1)
