@@ -13,5 +13,3 @@ Inputi za multiplayer:
 | Quickstep                       | Left Alt                | Right Alt              |
 | Ability                         | R                       | P                      |
 
-
-exe file je u implementacija (exe) folderu
