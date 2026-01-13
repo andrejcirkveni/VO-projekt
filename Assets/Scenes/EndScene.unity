@@ -534,7 +534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5f3ffa12c16467686ac67f105ca06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  winnerPrefab: {fileID: 1210294099381789327, guid: 5959f7973ceb045299dc257ea8bc351e, type: 3}
+  characterPrefabs:
+  - {fileID: 4772362480654977894, guid: b9528c4528300f84f914b479885be04e, type: 3}
+  - {fileID: 4824401537682218442, guid: 6b1538a89f924c84093a8dff947c86ec, type: 3}
+  - {fileID: 8950847406808171502, guid: cd35664479eadae44968092ebdf86de9, type: 3}
   spawnPoint: {fileID: 636076770}
   backButton: {fileID: 530240563}
 --- !u!1 &1204130894
