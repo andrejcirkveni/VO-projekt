@@ -1,3 +1,8 @@
+SINGLEPLAYER NE RADI!
+
+
+Inputi za multiplayer:
+
 | Akcija                          | Lijevi borac (Player 1) | Desni borac (Player 2) |
 | ------------------------------- | ----------------------- | ---------------------- |
 | Kretanje ulijevo                | A                       | J                      |
