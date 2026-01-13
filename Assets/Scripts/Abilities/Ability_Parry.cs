@@ -9,6 +9,7 @@ public class Ability_Parry : AbilityAbs
 
     public override void Activate(BehaviorFighter user)
     {
+        base.Activate(user);
         user.anim.SetTrigger("Parry");
 
     }

@@ -40,6 +40,8 @@ public class BehaviorFighter : MonoBehaviour
 
     public bool canBeInterrupted = true;
 
+    private float abilityLastUsedTime = -999f;
+
 
     void Awake()
     {
@@ -85,11 +87,20 @@ public class BehaviorFighter : MonoBehaviour
     {
         if (!canReceiveInput) return;
 
-        if (abilityAction.WasPressedThisFrame())
+        if (ability != null && abilityAction.WasPressedThisFrame())
         {
-            isAttacking = true;
-            ability?.Activate(this);
-            canReceiveInput = false;
+            if (Time.time >= abilityLastUsedTime + ability.cooldown)
+            {
+                isAttacking = true;
+                ability.Activate(this);
+                abilityLastUsedTime = Time.time;
+                canReceiveInput = false;
+            }
+            else if (ability != null)
+            {
+                float remaining = GetAbilityCooldownRemaining();
+                Debug.Log($"Ability on cooldown! {remaining:F1}s remaining");
+            }
         }
     }
 
@@ -302,5 +313,12 @@ public class BehaviorFighter : MonoBehaviour
         map?.Enable();
 
         InitializeInputActions();
+    }
+
+
+    public float GetAbilityCooldownRemaining()
+    {
+        float remaining = (abilityLastUsedTime + ability.cooldown) - Time.time;
+        return Mathf.Max(0f, remaining);
     }
 }
