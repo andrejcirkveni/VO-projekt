@@ -12,3 +12,6 @@ Inputi za multiplayer:
 | Heavy                           | Left Shift + C          | N + Lijevi klik miša   |
 | Quickstep                       | Left Alt                | Right Alt              |
 | Ability                         | R                       | P                      |
+
+
+exe file je u implementacija (exe) folderu
