@@ -282,7 +282,12 @@ public class BehaviorFighter : MonoBehaviour
         float time = 0f;
         while (time < data.duration)
         {
-            transform.position += Vector3.right * dir * data.force * Time.deltaTime;
+            float movement = dir * data.force * Time.deltaTime;
+            Vector3 newPosition = transform.position + Vector3.right * movement;
+
+            newPosition.x = Mathf.Clamp(newPosition.x, arenaLeft, arenaRight);
+
+            transform.position = newPosition;
             time += Time.deltaTime;
             yield return null;
         }
