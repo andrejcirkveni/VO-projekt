@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class GameController : MonoBehaviour
     [Header("Camera")]
     public CameraBehaviour fightCamera;
 
+    [Header("UI")]
+    public Image player1HealthBar;
+    public Image player2HealthBar;
+
     public GameObject aiEnemyPrefab;
 
     private BehaviorFighter player1;
@@ -29,6 +34,7 @@ public class GameController : MonoBehaviour
 
         player1 = SpawnPlayer(p1Index, player1Spawn);
         player1.SetActionMap("Fighter1");
+        player1.GetComponent<FighterHealth>().healthBar = player1HealthBar;
 
         if (GameMode.IsSingleplayer)
         {
@@ -39,6 +45,7 @@ public class GameController : MonoBehaviour
             player2 = SpawnPlayer(p2Index, player2Spawn);
             player2.SetActionMap("Fighter2");
         }
+        player2.GetComponent<FighterHealth>().healthBar = player2HealthBar;
 
         player1.opponent = player2.transform;
         player2.opponent = player1.transform;

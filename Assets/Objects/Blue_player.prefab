@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 2104200131951092120}
-  damage: 2
+  damage: 4
   knockback:
     force: 2
     duration: 0.25
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 2104200131951092120}
-  damage: 1
+  damage: 2
   knockback:
     force: 0
     duration: 0
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 2104200131951092120}
-  damage: 2
+  damage: 4
   knockback:
     force: 2
     duration: 0.25
@@ -1351,7 +1351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   owner: {fileID: 2104200131951092120}
-  damage: 1
+  damage: 2
   knockback:
     force: 0
     duration: 0
@@ -1561,8 +1561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122fc0e1963ea624796ce53ad9e837fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FighterHealth
-  health: 10
+  health: 60
+  maxHealth: 60
   isBlocking: 0
+  healthBar: {fileID: 0}
 --- !u!54 &1725931692169168489
 Rigidbody:
   m_ObjectHideFlags: 0

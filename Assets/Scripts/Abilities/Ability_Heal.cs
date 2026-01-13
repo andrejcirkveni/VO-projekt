@@ -12,7 +12,7 @@ public class Ability_Heal : AbilityAbs
         user.anim.SetTrigger("Heal");
     }
     public override void OnAnimationEvent(BehaviorFighter user) {
-        user.myHealth.Heal(3);
+        user.myHealth.Heal(10);
         if (healFXPrefab != null)
         {
             Vector3 pos = user.transform.position;
