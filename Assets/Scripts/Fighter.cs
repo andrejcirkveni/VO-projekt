@@ -45,16 +45,6 @@ public class BehaviorFighter : MonoBehaviour
 
     public Image abilityBar;
 
-    // AUDIO
-[Header("Audio Clips")]
-public AudioSource audioSource;  
-
-public AudioClip ability1; 
-public AudioClip ability2;
-public AudioClip ability3;
-public AudioClip punch;    
-
-
 
     void Awake()
     {
@@ -348,24 +338,4 @@ public AudioClip punch;
         float cooldownRemaining = GetAbilityCooldownRemaining();
         abilityBar.fillAmount = 1f-cooldownRemaining / ability.cooldown;
     }
-public void PlayAbility1() => PlaySound(ability1);
-public void PlayAbility2(float pitch = 2f)
-{
-    if (ability2 != null && audioSource != null)
-    {
-        audioSource.pitch = pitch;      
-        audioSource.PlayOneShot(ability2);
-        audioSource.pitch = 1f;  }       
-}
-
-
-public void PlayAbility3() => PlaySound(ability3);
-public void PlayPunch() => PlaySound(punch);
-
-private void PlaySound(AudioClip clip)
-{
-    if (clip != null && audioSource != null)
-        audioSource.PlayOneShot(clip);
-}
-
 }
