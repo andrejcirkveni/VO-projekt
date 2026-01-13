@@ -1,17 +1,14 @@
 fileFormatVersion: 2
-guid: 08bc16305fea348d2a7920a4f6524bc9
+guid: 5b32fc0b5cc3c49028bad99183ff4977
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - sfxSource: {instanceID: 0}
-  - musicSource: {instanceID: 0}
-  - music: {fileID: 8300000, guid: 7b7af52a819264261896000a1f7155ea, type: 3}
+  - audioSource: {instanceID: 0}
   - flame: {fileID: 8300000, guid: 391a7ae8783694057835a01c982eb052, type: 3}
-  - heal: {fileID: 8300000, guid: 9d55085a8eda94bdc9207d063689e02c, type: 3}
   - freeze: {fileID: 8300000, guid: 5c7cbb904fa9744da9bc63e68c856451, type: 3}
+  - heal: {fileID: 8300000, guid: 9d55085a8eda94bdc9207d063689e02c, type: 3}
   - punch: {fileID: 8300000, guid: 8ae55786904ba4f05b3386de8a5d0b82, type: 3}
-  - click: {fileID: 8300000, guid: 14b4ac06a80334eb89bcb9e47999b090, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
