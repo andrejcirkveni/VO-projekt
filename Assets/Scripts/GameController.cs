@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     [Header("UI")]
     public Image player1HealthBar;
     public Image player2HealthBar;
+    public Image player1AbilityBar;
+    public Image player2AbilityBar;
 
     public GameObject aiEnemyPrefab;
 
@@ -35,6 +37,7 @@ public class GameController : MonoBehaviour
         player1 = SpawnPlayer(p1Index, player1Spawn);
         player1.SetActionMap("Fighter1");
         player1.GetComponent<FighterHealth>().healthBar = player1HealthBar;
+        player1.abilityBar = player1AbilityBar;
 
         if (GameMode.IsSingleplayer)
         {
@@ -46,6 +49,7 @@ public class GameController : MonoBehaviour
             player2.SetActionMap("Fighter2");
         }
         player2.GetComponent<FighterHealth>().healthBar = player2HealthBar;
+        player2.abilityBar = player2AbilityBar;
 
         player1.opponent = player2.transform;
         player2.opponent = player1.transform;
