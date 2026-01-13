@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BehaviorFighter : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class BehaviorFighter : MonoBehaviour
 
     private float abilityLastUsedTime = 0f;
 
+    public Image abilityBar;
+
 
     void Awake()
     {
@@ -75,6 +78,7 @@ public class BehaviorFighter : MonoBehaviour
         HandleAttack();
         HandleGuard();
         HandleMovement();
+        UpdateAbilityBar();
     }
     void LateUpdate()
     {
@@ -325,5 +329,13 @@ public class BehaviorFighter : MonoBehaviour
     {
         float remaining = (abilityLastUsedTime + ability.cooldown) - Time.time;
         return Mathf.Max(0f, remaining);
+    }
+
+    void UpdateAbilityBar()
+    {
+        if (abilityBar == null || ability == null) return;
+
+        float cooldownRemaining = GetAbilityCooldownRemaining();
+        abilityBar.fillAmount = 1f-cooldownRemaining / ability.cooldown;
     }
 }
