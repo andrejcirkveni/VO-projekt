@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ability_Fireball
   m_EditorClassIdentifier: Assembly-CSharp::Ability_Fireball
   abilityName: 
-  cooldown: 0
+  cooldown: 10
   fireballPrefab: {fileID: 6646700139938653902, guid: e8d6ed4616ecc9a4190442573c68b758, type: 3}
   spawnOffset: 0.8

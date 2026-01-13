@@ -6,7 +6,16 @@ using UnityEngine.InputSystem;
 
 public class BehaviorFighter : MonoBehaviour
 {
-    public FighterInputConfig input;
+    public InputActionAsset inputActions;
+    private InputAction moveAction;
+    private InputAction attackAction;
+    private InputAction guardAction;
+    private InputAction abilityAction;
+    private InputAction quickstepAction;
+    private InputAction heavyAction;
+
+    public InputActionMap map;
+
     public Transform opponent;
     public AbilityAbs ability;
 
@@ -31,6 +40,8 @@ public class BehaviorFighter : MonoBehaviour
 
     public bool canBeInterrupted = true;
 
+    private float abilityLastUsedTime = 0f;
+
 
     void Awake()
     {
@@ -49,26 +60,17 @@ public class BehaviorFighter : MonoBehaviour
 
     void OnEnable()
     {
-        input.move.Enable();
-        input.attack.Enable();
-        input.guard.Enable();
-        input.ability.Enable();
-        input.quickstep.Enable();
-        input.heavyModifier.Enable();
+        map?.Enable();
     }
 
     void OnDisable()
     {
-        input.move.Disable();
-        input.attack.Disable();
-        input.guard.Disable();
-        input.ability.Disable();
-        input.quickstep.Disable();
-        input.heavyModifier.Disable();
+        map?.Disable();
     }
 
     void Update()
     {
+        if (moveAction == null) return;
         HandleAbility();
         HandleAttack();
         HandleGuard();
@@ -85,11 +87,20 @@ public class BehaviorFighter : MonoBehaviour
     {
         if (!canReceiveInput) return;
 
-        if (input.ability.WasPressedThisFrame())
+        if (ability != null && abilityAction.WasPressedThisFrame())
         {
-            isAttacking = true;
-            ability?.Activate(this);
-            canReceiveInput = false;
+            if (Time.time >= abilityLastUsedTime + ability.cooldown)
+            {
+                isAttacking = true;
+                ability.Activate(this);
+                abilityLastUsedTime = Time.time;
+                canReceiveInput = false;
+            }
+            else if (ability != null)
+            {
+                float remaining = GetAbilityCooldownRemaining();
+                Debug.Log($"Ability on cooldown! {remaining:F1}s remaining");
+            }
         }
     }
 
@@ -97,14 +108,14 @@ public class BehaviorFighter : MonoBehaviour
     {
         if (!canReceiveInput) return;
 
-        if (input.attack.WasPressedThisFrame())
+            if (attackAction.WasPressedThisFrame())
         {
             isAttacking = true;
             comboStep = comboStep % 3 + 1;
 
             anim.SetInteger("combo_step", comboStep);
 
-            if (input.heavyModifier.IsPressed())
+            if (heavyAction.IsPressed())
                 anim.SetTrigger("Heavy_attack");
             else
                 anim.SetTrigger("Light_attack");
@@ -118,7 +129,14 @@ public class BehaviorFighter : MonoBehaviour
 
     void HandleGuard()
     {
-        isBlocking = input.guard.IsPressed();
+        if (guardAction.WasPressedThisFrame())
+        {
+            isBlocking = true;
+        }
+        if (guardAction.WasReleasedThisFrame())
+        {
+            isBlocking = false;
+        }
 
         anim.SetBool("Guard", isBlocking);
         myHealth.isBlocking = isBlocking;
@@ -133,7 +151,7 @@ public class BehaviorFighter : MonoBehaviour
             return;
         }
 
-        float moveDir = input.move.ReadValue<float>();
+        float moveDir = moveAction.ReadValue<float>();
 
         if (Mathf.Abs(moveDir) < 0.01f)
         {
@@ -142,7 +160,7 @@ public class BehaviorFighter : MonoBehaviour
             return;
         }
 
-        if (input.quickstep.WasPressedThisFrame())
+        if (quickstepAction.WasPressedThisFrame())
         {
             anim.SetTrigger(moveDir > 0 ? "F_Quickstep" : "B_Quickstep");
             canReceiveInput = false;
@@ -150,18 +168,19 @@ public class BehaviorFighter : MonoBehaviour
         }
 
         int facing = opponent.position.x > transform.position.x ? 1 : -1;
-        float distance = opponent.position.x - transform.position.x;
+        float distance = Mathf.Abs(opponent.position.x - transform.position.x);
 
-        if ((moveDir < 0 && transform.position.x <= arenaLeft)
-            || (moveDir > 0 && transform.position.x >= arenaRight)
-            || (moveDir > 0 && distance < minDistanceToOpponent && facing == 1)
-            || (moveDir < 0 && distance < minDistanceToOpponent && facing == -1)
-            ) { 
-            moveDir = 0f;
+        if ((moveDir < 0 && transform.position.x <= arenaLeft) ||
+            (moveDir > 0 && transform.position.x >= arenaRight) ||
+            (moveDir == facing && distance < minDistanceToOpponent))
+        {
+            anim.SetBool("Walk_F", false);
+            anim.SetBool("Walk_B", false);
+            return;
         }
 
-        anim.SetBool("Walk_F", moveDir > 0);
-        anim.SetBool("Walk_B", moveDir < 0);
+        anim.SetBool("Walk_F", moveDir == facing);
+        anim.SetBool("Walk_B", moveDir == -facing);
 
         transform.position += Vector3.right * moveDir * moveSpeed * Time.deltaTime;
     }
@@ -222,7 +241,6 @@ public class BehaviorFighter : MonoBehaviour
         float targetX = startX + dir * distance;
 
         float opponentLimit = opponent.position.x - facing * minDistanceToOpponent;
-        Debug.Log(opponentLimit);
 
         if (facing == 1)
             targetX = Mathf.Min(targetX, opponentLimit);
@@ -272,4 +290,35 @@ public class BehaviorFighter : MonoBehaviour
         canReceiveInput = true;
     }
 
+    public void InitializeInputActions()
+    {
+        if (inputActions == null)
+        {
+            Debug.LogError("InputActionAsset is null!");
+            return;
+        }
+
+        moveAction = map?.FindAction("Move");
+        attackAction = map?.FindAction("Attack");
+        guardAction = map?.FindAction("Guard");
+        abilityAction = map?.FindAction("Ability");
+        quickstepAction = map?.FindAction("Quickstep");
+        heavyAction = map?.FindAction("Heavy");
+    }
+
+    public void SetActionMap(string actionMapName)
+    {
+        map?.Disable();
+        map = inputActions.FindActionMap(actionMapName);
+        map?.Enable();
+
+        InitializeInputActions();
+    }
+
+
+    public float GetAbilityCooldownRemaining()
+    {
+        float remaining = (abilityLastUsedTime + ability.cooldown) - Time.time;
+        return Mathf.Max(0f, remaining);
+    }
 }

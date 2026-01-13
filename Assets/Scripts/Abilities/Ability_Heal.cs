@@ -8,8 +8,8 @@ public class Ability_Heal : AbilityAbs
 
     public override void Activate(BehaviorFighter user)
     {
-        user.anim.SetTrigger("Heal");
         base.Activate(user);
+        user.anim.SetTrigger("Heal");
     }
     public override void OnAnimationEvent(BehaviorFighter user) {
         user.myHealth.Heal(3);

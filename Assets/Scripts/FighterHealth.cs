@@ -16,7 +16,7 @@ public class FighterHealth : MonoBehaviour
         if (isBlocking)
         {
             Debug.Log($"{name} BLOCKED");
-            return;
+            dmg = 0;
         }
 
         BehaviorFighter fighter = GetComponent<BehaviorFighter>();
@@ -24,12 +24,28 @@ public class FighterHealth : MonoBehaviour
         health -= dmg;
         Debug.Log($"{name} HP: {health}");
 
-        if (knockback.HasValue && fighter != null)
+        if (knockback.HasValue && fighter != null && !isBlocking)
         {
             fighter.ApplyKnockback(attacker, knockback.Value);
         }
 
-        if (fighter.canBeInterrupted)
+        if (health-dmg <= 0)
+        {
+            health = 0;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
+                rb.isKinematic = false;
+            }
+
+            anim.applyRootMotion = true;
+            anim.SetTrigger("End");
+            Debug.Log("KO");
+            return;
+        }
+
+        if (fighter.canBeInterrupted && !isBlocking)
         {
             anim.SetTrigger("Hit");
 
@@ -37,12 +53,14 @@ public class FighterHealth : MonoBehaviour
             fighter.EnableNextInput();
         }
 
-        if (health <= 0)
-            Debug.Log("KO");
+        
+            
     }
     public void Heal(int amount)
     {
+        
         health += amount;
+        if (health < 10) health = 10;
         Debug.Log($"{gameObject.name} Healed. HP: {health}");
     }
 }

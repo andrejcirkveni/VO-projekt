@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Ability_Heal
   m_EditorClassIdentifier: Assembly-CSharp::Ability_Heal
   abilityName: 
-  cooldown: 0
+  cooldown: 10
   healFXPrefab: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554, type: 3}
