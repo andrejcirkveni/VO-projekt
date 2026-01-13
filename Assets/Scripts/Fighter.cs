@@ -40,7 +40,7 @@ public class BehaviorFighter : MonoBehaviour
 
     public bool canBeInterrupted = true;
 
-    private float abilityLastUsedTime = -999f;
+    private float abilityLastUsedTime = 0f;
 
 
     void Awake()
