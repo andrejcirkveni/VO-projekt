@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: 08bc16305fea348d2a7920a4f6524bc9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sfxSource: {instanceID: 0}
+  - musicSource: {instanceID: 0}
+  - music: {instanceID: 0}
+  - flame: {instanceID: 0}
+  - heal: {instanceID: 0}
+  - freeze: {instanceID: 0}
+  - punch: {fileID: 8300000, guid: 8ae55786904ba4f05b3386de8a5d0b82, type: 3}
+  - click: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
