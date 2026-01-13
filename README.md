@@ -1,5 +1,9 @@
-Kontrole za borce:
-
-akcija:    hodanje ulijevo     udesno      attack          block             heavy      quickstep     ability
-lijevi:          A               D           C               V             LEFT SHIFT    LEFT ALT        R
-desni:           J               L        LEFT MOUSE    RIGHT MOUSE            N         RIGHT ALT       P
+| Akcija                          | Lijevi borac (Player 1) | Desni borac (Player 2) |
+| ------------------------------- | ----------------------- | ---------------------- |
+| Kretanje ulijevo                | A                       | J                      |
+| Kretanje udesno                 | D                       | L                      |
+| Attack                          | C                       | Lijevi klik miša       |
+| Block                           | V                       | Desni klik miša        |
+| Heavy                           | Left Shift + C          | N + Lijevi klik miša   |
+| Quickstep                       | Left Alt                | Right Alt              |
+| Ability                         | R                       | P                      |
