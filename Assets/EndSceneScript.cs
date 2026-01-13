@@ -15,15 +15,22 @@ public class VictoryScreen : MonoBehaviour
 
     void Start()
     {
-        // Prikaz pobjedničkog modela
-        if (winnerPrefab != null && spawnPoint != null)
-        {
-            spawnedWinner = Instantiate(winnerPrefab, spawnPoint.position, spawnPoint.rotation);
-        }
-        else
-        {
-            Debug.LogWarning("WinnerPrefab ili SpawnPoint nisu postavljeni!");
-        }
+if (winnerPrefab != null && spawnPoint != null)
+    {
+        // Instanciraj model sa rotacijom 180° po Y
+        spawnedWinner = Instantiate(
+            winnerPrefab, 
+            spawnPoint.position, 
+            Quaternion.Euler(spawnPoint.rotation.eulerAngles.x, spawnPoint.rotation.eulerAngles.y + 90f, spawnPoint.rotation.eulerAngles.z)
+        );
+
+        // Postavi scale na 85,85,85
+        spawnedWinner.transform.localScale = new Vector3(85f, 85f, 85f);
+    }
+    else
+    {
+        Debug.LogWarning("WinnerPrefab ili SpawnPoint nisu postavljeni!");
+    }
 
         // Dodaj listener na Back gumb
         if (backButton != null)
