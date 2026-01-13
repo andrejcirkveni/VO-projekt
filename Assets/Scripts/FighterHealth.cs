@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FighterHealth : MonoBehaviour
 {
-    public int health = 10;
+    public int health = 30;
+    public int maxHealth = 30;
     public bool isBlocking = false;
     private Animator anim;
     private bool isDead = false;
+    public Image healthBar;
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class FighterHealth : MonoBehaviour
 
         BehaviorFighter fighter = GetComponent<BehaviorFighter>();
         health -= dmg;
+        health = Mathf.Max(health, 0);
+        UpdateHealthBar();
         Debug.Log($"{name} HP: {health}");
 
         if (knockback.HasValue && fighter != null && !isBlocking)
@@ -103,7 +108,17 @@ public class FighterHealth : MonoBehaviour
     public void Heal(int amount)
     {
         health += amount;
-        health = Mathf.Clamp(health, 0, 10);
+        health = Mathf.Clamp(health, 0, maxHealth);
+        UpdateHealthBar();
         Debug.Log($"{gameObject.name} Healed. HP: {health}");
+    }
+
+    void UpdateHealthBar()
+    {
+        Debug.Log(healthBar != null);
+        if (healthBar != null)
+        {
+            healthBar.fillAmount = (float)health / maxHealth;
+        }
     }
 }
